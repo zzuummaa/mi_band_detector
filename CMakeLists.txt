@@ -1,0 +1,20 @@
+cmake_minimum_required(VERSION 3.3)
+
+project(mi_band_detector C ASM)
+
+include(CMake_nRF5x_settings.cmake)
+include(CMake_nRF5x.cmake)
+
+nRF5x_setup()
+nRF5x_addAppScheduler()
+nRF5x_addBSP(True null null)
+nRF5x_addAppTimer()
+nRF5x_addAppButton()
+nRF5x_addBLEServiceNUS()
+nRF5x_addBLEServiceNUSc()
+nRF5x_addBLEDBDiscovery()
+nRF5x_addAppUART()
+nRF5x_addAppFIFO()
+set(BEACON_SOURCES ${SOURCE_FILES} "main.c" "retarget.c")
+nRF5x_addExecutable(${PROJECT_NAME} "${BEACON_SOURCES}")
+add_definitions(-DENABLE_DEBUG_LOG_SUPPORT -DTRACE_UART)
